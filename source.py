@@ -83,24 +83,37 @@ class Admin:
                 print("Định dạng không phù hợp!")
 
     def tim_kiem_hoc_sinh(self, msv):
-        msv = str(msv)
+        msv = str(msv) # Đảm bảo mã sinh viên là chuỗi để so sánh
+        
         if msv in data_hoc_sinh:
-            msvien, name , ngay_sinh, tx, gk, ck = data_hoc_sinh[msv].msv, data_hoc_sinh[msv].ho_va_ten, data_hoc_sinh[msv].birth, data_hoc_sinh[msv].thuong_xuyen, data_hoc_sinh[msv].giua_ki, data_hoc_sinh[msv].cuoi_ki
+            hs = data_hoc_sinh[msv]
+            # Tính toán lại điểm tổng kết để hiển thị
+            msvien, name , tx, gk, ck = data_hoc_sinh[msv].msv, data_hoc_sinh[msv].ho_va_ten, data_hoc_sinh[msv].thuong_xuyen, data_hoc_sinh[msv].giua_ki, data_hoc_sinh[msv].cuoi_ki
             tong_diem, gpa , rank = danh_gia(float(tx),float(gk), float(ck))
-            print("Đang tìm kiếm...")
-            time.sleep(1)
-            print("--- Đã tìm thấy sinh viên!---")
-            print("______________________________")
-            print('\n')
-            print(f"Họ và tên: {name}")
-            print(f"Mã sinh viên: {msvien}")
-            print('------------------------------')
-            print(f"Điểm TX: {tx}, " f"Điểm GK: {gk}", f"Điểm CK: {ck}")
-            print("Điểm Tổng:", tong_diem)
-            print("Điểm GPA: ", gpa)
-            print("Xếp loại: ", rank)
+            # Tạo dữ liệu cho bảng (1 dòng duy nhất chứa thông tin hs đó)
+            table_data = [[
+                msvien,
+                name,
+                tx, 
+                gk, 
+                ck, 
+                tong_diem, 
+                gpa, 
+                gpa, 
+                rank
+            ]]
+            
+            # Tạo tiêu đề cột
+            headers = ["Mã SV", "Họ và tên", "Ngày sinh", "Điểm TX", "Điểm GK", "Điểm CK", "TB", "GPA", "Xếp loại"]
+            
+            print("\n" + "="*30 + " KẾT QUẢ TÌM KIẾM " + "="*30)
+            # In ra dạng bảng lưới (grid) cho dễ nhìn
+            print(tabulate(table_data, headers=headers, tablefmt="grid"))
+            
+            input("\nẤn Enter để tiếp tục...")
         else:
-            print("Không tồn tại sinh viên")
+            print(f"Không tìm thấy học sinh có mã số: {msv}")
+            time.sleep(1)
 
     def thay_doi_diem(self, msv):
         if str(msv) in data_hoc_sinh:
@@ -184,6 +197,7 @@ def login():
         clear_screen()
         print("CS4 - Quản lý điểm sinh viên")
         print("--------------------------")
+        print("===== ĐĂNG NHẬP =====")
         account = input("Nhập account (nếu là sinh viên thì nhập mã sinh viên): ")
         if account == 'Patemuonnam':
             return Truy_cap_admin()
