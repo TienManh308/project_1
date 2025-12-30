@@ -55,7 +55,7 @@ class Admin:
     def them_hoc_sinh(self):
         while True:
             try:
-                print("Adding new student")
+                print("=== Thêm học sinh mới ===")
                 id = int(input("Mã SV: "))
                 name = (input("Họ và tên: "))
                 birth_day = input("Nhập ngày tháng năm sinh:(theo cách nhau bằng /) ")
@@ -181,9 +181,9 @@ def clear_screen():
 def login():
     while True:
         clear_screen()
-        print("CS4 - Classroom management")
+        print("CS4 - Quản lý điểm sinh viên")
         print("--------------------------")
-        account = input("Nhập ID: ")
+        account = input("Nhập account (nếu là sinh viên thì nhập mã sinh viên): ")
         if account == 'Patemuonnam':
             return Truy_cap_admin()
 
@@ -197,7 +197,7 @@ def login():
 def Truy_cap_admin():
     admin = Admin()
     while True:
-        print("\n=== Classroom Data Manager ===")
+        print("\n=== Phần mềm quản lý lớp học ===")
         print("1. Thêm học sinh mới")
         print("2. Tìm kiếm theo ID")
         print("3. Hiển thị tất cả điểm số")
@@ -232,7 +232,7 @@ def Truy_cap_admin():
 def Truy_cap_hoc_sinh(msv):
     hoc_sinh = Admin()
     while True:
-        print("\n=== Classroom Data Manager ===")
+        print("\n=== Phần mềm quản lý lớp học ===")
         print("1. Bảng điểm của lớp")
         print("2. Điểm của bản thân")
         print("3.Thoát chương trình")
