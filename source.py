@@ -70,6 +70,7 @@ class Admin:
                     else:
                         print('---Thêm học sinh thành công---')
                         new_hoc_sinh = Lop_hoc(str(id), name,birth_day, tx , gk, ck)
+                        data_hoc_sinh[f'{id}'] = new_hoc_sinh
                         with open(File_path_csv, mode = 'a',encoding = 'utf-8-sig', newline = '') as file:
                             writer = csv.writer(file)
                             writer.writerow([id, name ,'QH-2025-I/CQ-I-CS4',birth_day, tx, gk,ck])
